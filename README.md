@@ -6,7 +6,7 @@
 
 <div align="center">
 
-![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
+![Python 3.13+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)
 ![Build Status](https://img.shields.io/badge/build-passing-green.svg)
 ![Platform](https://img.shields.io/badge/platform-cross--platform-lightgrey.svg)
 ![](https://badge.mcpx.dev?type=server 'MCP Server')
@@ -17,6 +17,9 @@
 ## 🌐 Usage
 
 https://github.com/user-attachments/assets/619cd6a1-e064-4518-a84c-8134c09fae03
+
+> [!INFO]
+> This project is experimental and in early development.
 
 > [!IMPORTANT]
 > Security and customer trust are fundamental to everything we do at Qonto. While this repository enables powerful innovation and integration capabilities, it's important to understand that certain risks are inherent to the use of the MCP technology itself. Please review the following security information carefully.
@@ -38,18 +41,30 @@ Questions or security concerns? Contact us at `security@qonto.com`.
 
 ## Getting started
 
-1. Install [Claude Desktop](https://claude.ai/download)
+1. Install [Claude Desktop](https://claude.ai/download) or any [MCP-compatible client](https://modelcontextprotocol.io/clients)
 2. Get your organization ID and API key from your Qonto account's `/settings/integrations` section:
 
-![image](https://github.com/user-attachments/assets/2ae48bff-d393-4aaf-92e9-3170a4f324c0)
+| Access Integrations Section | Get API key |
+|--------|---------|
+| ![image](https://github.com/user-attachments/assets/c2818d2f-6336-4f9e-9fe3-4526a4f3cd1e) | ![image](https://github.com/user-attachments/assets/2ae48bff-d393-4aaf-92e9-3170a4f324c0) |
 
 ### Option 1: Docker Installation (Recommended)
+
+Before starting, make sure to have [Docker](https://docs.docker.com/get-started/) installed on your machine.
 
 1. Pull the Docker image:
    ```bash
    docker pull qonto/qonto-mcp-server:latest
    ```
-2. In your Claude Desktop `claude_desktop_config.json` file, add the `Qonto MCP` server as follows:
+2. Locate the claude_desktop_config.json file in Claude Desktop:
+   - macOS:
+    `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows:
+    `%APPDATA%\Claude\claude_desktop_config.json`
+   - Linux:
+    `~/.config/Claude/claude_desktop_config.json`
+
+3. In your Claude Desktop `claude_desktop_config.json` file, add the `Qonto MCP` server as follows:
 
 ```jsonc
 {
