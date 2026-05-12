@@ -53,7 +53,9 @@ def create_client_invoice_draft(
         footer: Custom footer text on the invoice.
         upload_id: UUID of a previously uploaded attachment to attach to the invoice.
         performance_start_date: Start of performance period (YYYY-MM-DD). Required if
-                                performance_end_date is set.
+                                performance_end_date is set. Not updateable after
+                                creation; Qonto's PATCH schema only accepts the
+                                singular `performance_date` field.
         performance_end_date: End of performance period (YYYY-MM-DD). Must be
                               >= performance_start_date.
         discount: Top-level invoice discount, e.g. {"type": "percentage", "value": "0.1"}
@@ -138,8 +140,7 @@ def update_client_invoice_draft(
     header: Optional[str] = None,
     footer: Optional[str] = None,
     upload_id: Optional[str] = None,
-    performance_start_date: Optional[str] = None,
-    performance_end_date: Optional[str] = None,
+    performance_date: Optional[str] = None,
     discount: Optional[Dict] = None,
     settings: Optional[Dict] = None,
     report_einvoicing: Optional[bool] = None,
@@ -168,8 +169,12 @@ def update_client_invoice_draft(
         header: Custom header text.
         footer: Custom footer text.
         upload_id: UUID of an uploaded attachment to attach.
-        performance_start_date: Start of performance period (YYYY-MM-DD).
-        performance_end_date: End of performance period (YYYY-MM-DD).
+        performance_date: Single performance date (YYYY-MM-DD). Qonto's PATCH
+                          schema only accepts this singular field, not the
+                          performance_start_date / performance_end_date pair
+                          available on create. Behavior on a draft that was
+                          created with a performance period is undocumented —
+                          verify before relying on it for periodic invoices.
         discount: Top-level invoice discount object.
         settings: InvoiceSettingsOverride object.
         report_einvoicing: Italy only. Whether to report via SDI.
@@ -202,8 +207,7 @@ def update_client_invoice_draft(
         "header": header,
         "footer": footer,
         "upload_id": upload_id,
-        "performance_start_date": performance_start_date,
-        "performance_end_date": performance_end_date,
+        "performance_date": performance_date,
         "discount": discount,
         "settings": settings,
         "report_einvoicing": report_einvoicing,
